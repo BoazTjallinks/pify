@@ -96,8 +96,9 @@ app.get('/data', auth, async (req, res) => {
   let memused = 0;
   let memper = 0;
   let cpudata = 0;
+  let hostname = 'unknown'
   try {
-
+    hostname = await os.hostname()
     await si.cpuTemperature(d => {
       temp = d.main
     })
@@ -118,13 +119,14 @@ app.get('/data', auth, async (req, res) => {
       success: true,
       temperature: temp,
       ram: memper,
-      cpu: cpudata
+      cpu: cpudata,
+      hostname: hostname
     })
   } catch (error) {
     console.error(error);
     await res.json({
       success: false,
-      message: "Something wen't wrong, check the console."
+      message: "Something went wrong, check the console."
     })
     console.log(error)
   }
@@ -143,7 +145,7 @@ app.get('/reboot', auth, (req, res) => {
   } catch (_) {
     res.json({
       success: false,
-      message: 'Something wen\'t wrong while performing this actions, try again later.'
+      message: 'Something went wrong while performing this actions, try again later.'
     })
     console.log(_)
   }
@@ -162,7 +164,26 @@ app.get('/shutdown', auth, (req, res) => {
   } catch (_) {
     res.json({
       success: false,
-      message: 'Something wen\'t wrong while performing this actions, try again later.'
+      message: 'Something went wrong while performing this actions, try again later.'
+    })
+    console.log(_)
+  }
+})
+
+app.get('/freeram', auth, (req, res) => {
+  try {
+    console.log('[APP] Freeing Ram')
+    execute('sudo echo 3 | sudo tee /proc/sys/vm/drop_caches', d => {
+      console.log(d)
+    })
+    res.json({
+      success: true,
+      message: 'Freed memory.'
+    })
+  } catch (_) {
+    res.json({
+      success: false,
+      message: 'Something went wrong while performing this actions, try again later.'
     })
     console.log(_)
   }

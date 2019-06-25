@@ -20,6 +20,17 @@
         });
     }
 
+    function freeRam() {
+      fetch('/freeram')
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (d) {
+          console.log(JSON.stringify(d));
+          alert(d.message)
+        });
+    }
+
     function refresh() {
       location.reload();
     }
