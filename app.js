@@ -74,6 +74,22 @@ app.post('/login', (req, res) => {
 
 })
 
+// Check if logged in
+app.get('/heartbeat', (req, res) => {
+  let session = req.cookies.session
+  if (session === sessionKey) {
+    res.json({
+      success: true,
+      login: true
+    })
+  } else {
+    res.json({
+      success: true,
+      login: false
+    })
+  }
+})
+
 // Authentication function
 function auth(req, res, next) {
   let session = req.cookies.session

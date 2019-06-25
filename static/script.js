@@ -68,10 +68,26 @@
           $('#connectAddress').text(d.ip)
         })
     }
+
+    function heartbeat() {
+      fetch('/heartbeat')
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (d) {
+          if (d.login === false) {
+            window.location.href = "/login"
+          }
+        })
+    }
     $(document).ready(function () {
       getDevice()
       getData()
+      heartbeat()
       setInterval(() => {
         getData()
       }, 5000);
+      setInterval(() => {
+        heartbeat()
+      }, 10000);
     });
