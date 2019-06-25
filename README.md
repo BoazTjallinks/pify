@@ -2,7 +2,8 @@
 An easy to use control panel for your Raspberry PI or any other device that runs Linux*
 
 # Setup
-You'll have to make a `.env` file with the following format:
+First, clone the repository. Then install all the dependencies using `npm i` or `yarn install` (whichever you like).
+After that you'll have to make a `.env` file with the following format:
 ```
 PASSWORD="Your Password Here"
 ```

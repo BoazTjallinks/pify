@@ -10,9 +10,13 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+  <script src="https://kit.fontawesome.com/422063e46a.js"
+    integrity="sha384-oDvhHAiExTfmcX9h/DT0+Eibx0CQAhqTj+JLYfNHLjfJ2c6IQfDAbX4LuZswwcUA" crossorigin="anonymous">
+  </script>
+
   <title>Pify Control Panel</title>
   <meta name="description" content="An Open Source control panel for Raspberry Pi's and other Linux devices.">
-<link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
@@ -22,14 +26,14 @@
     <p>An easy to use control panel for your Raspberry Pi.</p>
   </div>
 
-<% if(typeof checkpassword != "undefined") { %>
-<div class="container">
-  <div class="alert alert-danger" role="alert">
-  Couldn't log in, check your password.
-</div>
-<% } %>
+  <% if(typeof checkpassword != "undefined") { %>
+  <div class="container">
+    <div class="alert alert-danger" role="alert">
+      Couldn't log in, check your password.
+    </div>
+    <% } %>
 
-</div>
+  </div>
   <div class="container">
     <div class="shadow-sm p-3 mb-5 bg-white rounded">
       <form class="form-inline" action="/login" method="post">
@@ -46,7 +50,8 @@
   <div class="container fixed-bottom">
     <p>
       <div class="shadow-sm p-3 mb-5 bg-white rounded">
-        Copyright &copy; <b>LNGZL.</b> Licensed under the MIT License. <a href="https://github.com/abcdan/pify">Github Project</a>
+        Copyright &copy; <b>LNGZL.</b> Licensed under the MIT License. <a href="https://github.com/abcdan/pify">Github
+          Project</a>
       </div>
     </p>
   </div>

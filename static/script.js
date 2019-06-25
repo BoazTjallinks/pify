@@ -55,7 +55,23 @@
           }
         });
     }
+
+    function getDevice() {
+      fetch('/deviceinfo')
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (d) {
+          let hostname = d.hostname
+          let cpu = d.cpu
+          let os = d.os
+          $('#hostname').text(hostname)
+          $('#cpuname').text(cpu)
+          $('#operatingsystem').text(os)
+        })
+    }
     $(document).ready(function () {
+      getDevice()
       getData()
       setInterval(() => {
         getData()

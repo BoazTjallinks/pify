@@ -96,9 +96,7 @@ app.get('/data', auth, async (req, res) => {
   let memused = 0;
   let memper = 0;
   let cpudata = 0;
-  let hostname = 'unknown'
   try {
-    hostname = await os.hostname()
     await si.cpuTemperature(d => {
       temp = d.main
     })
@@ -119,16 +117,37 @@ app.get('/data', auth, async (req, res) => {
       success: true,
       temperature: temp,
       ram: memper,
-      cpu: cpudata,
-      hostname: hostname
+      cpu: cpudata
     })
-  } catch (error) {
-    console.error(error);
+  } catch (e) {
+    console.error(e);
     await res.json({
       success: false,
       message: "Something went wrong, check the console."
     })
-    console.log(error)
+  }
+})
+
+app.get('/deviceinfo', auth, async (req, res) => {
+  let hostname = 'unknown'
+  let cpu = 'unknown'
+  let operatingsystem = 'unknown'
+  try {
+    hostname = await os.hostname()
+    cpu = await os.cpus()
+    operatingsystem = await os.type()
+    await res.json({
+      success: true,
+      hostname: hostname,
+      cpu: cpu[0].model,
+      os: operatingsystem
+    })
+  } catch (e) {
+    console.error(e);
+    await res.json({
+      success: false,
+      message: "Something went wrong, check the console."
+    })
   }
 })
 
