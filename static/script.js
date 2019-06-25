@@ -62,12 +62,10 @@
           return response.json();
         })
         .then(function (d) {
-          let hostname = d.hostname
-          let cpu = d.cpu
-          let os = d.os
-          $('#hostname').text(hostname)
-          $('#cpuname').text(cpu)
-          $('#operatingsystem').text(os)
+          $('#hostname').text(d.hostname)
+          $('#cpuname').text(d.cpu)
+          $('#operatingsystem').text(d.os)
+          $('#connectAddress').text(d.ip)
         })
     }
     $(document).ready(function () {

@@ -132,15 +132,20 @@ app.get('/deviceinfo', auth, async (req, res) => {
   let hostname = 'unknown'
   let cpu = 'unknown'
   let operatingsystem = 'unknown'
+  let nodeIp = 'unknown'
+  var ip = require('ip');
+
   try {
     hostname = await os.hostname()
     cpu = await os.cpus()
     operatingsystem = await os.type()
+    nodeIp = await ip.address()
     await res.json({
       success: true,
       hostname: hostname,
       cpu: cpu[0].model,
-      os: operatingsystem
+      os: operatingsystem,
+      ip: nodeIp
     })
   } catch (e) {
     console.error(e);
