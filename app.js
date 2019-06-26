@@ -16,10 +16,8 @@ require('dotenv').config()
 const app = express()
 const cpu = osu.cpu
 
-
 // Local configuration
 const port = 80
-
 
 // Important
 let sessionKey = uuid.v4()
@@ -118,9 +116,8 @@ app.get('/data', auth, async (req, res) => {
     })
 
     await si.mem(d => {
-      memtotal = d.total
-      memfree = d.free
-      memused = d.used
+      memtotal = parseInt(d.total / 1000000000)
+      memused = parseInt(d.used / 1000000000)
       memper = (100 / d.total) * d.used
     })
 
@@ -133,6 +130,8 @@ app.get('/data', auth, async (req, res) => {
       success: true,
       temperature: temp,
       ram: memper,
+      memtotal: memtotal,
+      memused: memused,
       cpu: cpudata
     })
   } catch (e) {

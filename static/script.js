@@ -46,6 +46,7 @@
           let temp = ~~(d.temperature)
           $('#ramusage').attr('aria-valuenow', ram).css('width', ram + '%').html('RAM: ' + ram + '%')
           $('#cpu').attr('aria-valuenow', cpu).css('width', cpu + '%').html('CPU: ' + cpu + '%')
+          $('#raminfo').prop('title', d.memused + 'GB/' + d.memtotal + 'GB');
           if (temp < 50) {
             $('#temperature').html(temp + '&#8451;').attr("class", "badge badge-primary");
           } else if (temp >= 50 && temp <= 65) {
